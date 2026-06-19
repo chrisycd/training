@@ -5,14 +5,16 @@
  */
 process SAMTOOLS_INDEX {
 
-    container
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
     input:
+    path bamfile
 
     output:
+    tuple path(bamfile), path("${bamfile}.bai")
 
     script:
     """
-
+    samtools index '${bamfile}'
     """
 }
